@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int N,temp;
+    string s;
+    while((cin>>N)&&(N!=0)){
+        temp=0;
+        string *p=new string[N];
+        int *q=new int[N];
+        for(int i=0;i<N;i++){
+            cin>>s;bool a=false;
+            for(int j=0;j<temp;j++){
+                if(p[j]==s){
+                    q[j]++;
+                    a=true;
+                    break;
+                }
+            }
+            if(a==false){
+                    p[temp]=s;
+                    q[temp]=0;
+                    temp++;
+            }
+        }
+
+        int max=0;
+        for(int i=0;i<temp;i++){
+            if(q[i]>q[max])
+                max=i;
+        }
+        string *OUT =new string[N];
+        int count=0;
+        for(int i=0;i<temp;i++){
+            if(q[i]==q[max]){
+                OUT[count]=p[i];
+                count++;
+            }
+        }
+        string t;
+        for(int i=0;i<count;i++){
+            for(int j=i+1;j<count;j++){
+                 if(OUT[i]>OUT[j]){
+                    t=OUT[i];
+                    OUT[i]=OUT[j];
+                    OUT[j]=t;
+                 }
+            }
+        }
+        for(int i=0;i<count;i++){
+            cout<<OUT[i]<<endl;
+        }
+    }
+    return 0;
+}
